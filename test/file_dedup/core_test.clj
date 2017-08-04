@@ -2,6 +2,13 @@
   (:require [clojure.test :refer :all]
             [file-dedup.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest zero-arity
+  (testing "file-dedup with no arguments"
+    (let [usage "Usage: file-dedup dir1 dir2"]
+    (is (= usage (file-dedup))))))
+
+
+(deftest open-dir
+  (testing "file-dedup on a directory")
+  (is (= "core.clj" (file-dedup "C:/Users/c17722/Documents/workspace/clojure/file-dedup/src/file_dedup")))
+  )
