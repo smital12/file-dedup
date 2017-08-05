@@ -10,10 +10,12 @@
   "recursively lists all files in a directory"
   (->> (file-seq (io/file d))
        (filter #(.isFile %))
-       (map (fn [file] {(str (.getName file)) [file]}))
-       (apply merge-with concat)
+       (map (fn [file] {:size (.length file)
+                        :object [file]}))
+       (group-by :size)
        vals
-       (filter #(> (count %) 1))))
+       (filter #(> (count %) 1))
+       ))
 
 
 (defn file-dedup
